@@ -1,0 +1,18 @@
+[
+  {
+    "id": "53d44090-1878-4f3a-bd69-9af43535df21",
+    "qustionDetail": "Tell me about yourself ?"
+  },
+  {
+    "id": "96f8173a-2a8a-4a96-bb63-3dd7cc2e09b6",
+    "qustionDetail": "Why do you want this job?"
+  },
+  {
+    "id": "1daa37fd-b9ea-4f7c-885f-184ef0cc1f80",
+    "qustionDetail": "What are your weaknesses?"
+  },
+  {
+    "id": "f4e818cd-c90d-45cd-8f07-0895e4c2e091",
+    "qustionDetail": "What are your goals?"
+  }
+]
