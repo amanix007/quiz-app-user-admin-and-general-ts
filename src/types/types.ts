@@ -1,30 +1,33 @@
-export interface QustionInterface {
+export interface QuestionInterface {
   id: string;
-  qustionDetail: string;
+  questionTitle: string;
+  answer: UserAnswerInterface;
 }
 
-export interface UserQuestionInterface {
-  id: string;
-  qustionID: string;
+export interface UserAnswerInterface {
   answerHistory: string[];
-
 }
 
 
 
-interface UserInterface {
+interface ProfileInterface {
   role: "admin" | "participant"
 }
-export interface AdminInterface extends UserInterface {
+export interface AdminInterface extends ProfileInterface {
   id: string;
   qustion: string;
   role: "admin"
-  questions: QustionInterface[]
+  questions: QuestionInterface[]
 }
-export interface ParticipantInterface extends UserInterface {
+export interface ParticipantInterface extends ProfileInterface {
   id: string;
-  qustion: string;
   role: "participant"
-  questions: UserQuestionInterface[]
+
+}
+
+export interface AuthInterface {
+
+  authenticated: boolean;
+  roleType: "admin" | "participant" | "";
 }
 

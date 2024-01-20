@@ -3,23 +3,45 @@ import { Button, Container, TextField, Typography } from "@mui/material";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { theme } from "../../theme/theme";
+import { AuthInterface } from "../../types/types";
+import { useNavigate } from "react-router-dom";
 
+interface PropsInterface {
+  Auth: AuthInterface;
+  setAuth: (auth: AuthInterface) => void;
+}
 
-
-
-
-export default function Login() {
+export default function Login(props: PropsInterface) {
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
-      username: "",
-      password: "",
+      username: "admin",
+      password: "admin",
     },
     validationSchema: Yup.object({
       username: Yup.string().required("Username is required"),
       password: Yup.string().required("Password is required"),
     }),
     onSubmit: (values) => {
-      // Add your login logic here
+      const { username, password } = values;
+      if (username === "admin" && password === "admin") {
+        props.setAuth({
+          authenticated: true,
+          roleType: "admin",
+        });
+        navigate("/admin/questions");
+      } else if (username === "participant" && password === "participant") {
+        props.setAuth({
+          authenticated: true,
+          roleType: "participant",
+        });
+        navigate("/user/answers");
+      } else {
+        props.setAuth({
+          authenticated: false,
+          roleType: "",
+        });
+      }
       console.log(`Username: ${values.username}, Password: ${values.password}`);
     },
   });
@@ -40,7 +62,7 @@ export default function Login() {
           marginTop: theme.spacing(8),
         }}
       >
-        <Typography component="h1" variant="h5">
+        <Typography component="h1" variant="h5" fontWeight={"bold"}>
           Login
         </Typography>
         <form
@@ -90,6 +112,17 @@ export default function Login() {
             Sign In
           </Button>
         </form>
+        <div>
+          <Typography sx={{ mb: 1 }}>
+            Admin Login : <br /> Username: <strong> admin</strong>, Password:{" "}
+            <strong>admin</strong>
+          </Typography>
+          <Typography>
+            Participant Login : <br />
+            UserName: <strong>participant</strong>, Password:{" "}
+            <strong>participant</strong>
+          </Typography>
+        </div>
       </div>
     </Container>
   );

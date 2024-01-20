@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { QustionInterface } from '../types/types';
+import { QuestionInterface } from '../types/types';
 
 const useQuestions = () => {
-  const [questions, setQuestions] = useState<QustionInterface[]>(() => {
+  const [questions, setQuestions] = useState<QuestionInterface[]>(() => {
     const questionsArray = localStorage.getItem('questions');
     return questionsArray ? JSON.parse(questionsArray) : [];
   });
@@ -19,12 +19,23 @@ const useQuestions = () => {
     return questions;
   };
 
-  const getSingleQuestion = (id: string): QustionInterface | undefined => {
+  const getSingleQuestion = (id: string): QuestionInterface | undefined => {
     return questions.find(q => q.id === id)
 
   };
-  const addQuestion = (newQuestion: QustionInterface) => {
+  const addQuestion = (newQuestion: QuestionInterface) => {
     setQuestions((prevQuestions) => [...prevQuestions, newQuestion]);
+  };
+
+  const updateQuestion = (updatedQuestion: QuestionInterface) => {
+    setQuestions(prev => {
+      return prev.map(q => {
+        if (q.id === updatedQuestion.id) {
+          q.questionTitle = updatedQuestion.questionTitle;
+        }
+        return q;
+      })
+    })
   };
 
   const removeQuestion = (id: string) => {
@@ -32,8 +43,19 @@ const useQuestions = () => {
       prevQuestions.filter(q => q.id !== id)
     );
   };
+  const addAnswer = (updatedQuestionWithAnswer: QuestionInterface): void => {
 
-  return { getQuestions, getSingleQuestion, addQuestion, removeQuestion };
+    setQuestions(prev => {
+      return prev.map(q => {
+        if (q.id === updatedQuestionWithAnswer.id) {
+          q = updatedQuestionWithAnswer;
+        }
+        return q;
+      })
+    })
+  };
+
+  return { getQuestions, getSingleQuestion, addQuestion, removeQuestion, addAnswer, updateQuestion };
 };
 
 export default useQuestions;
