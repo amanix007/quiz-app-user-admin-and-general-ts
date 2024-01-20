@@ -40,20 +40,4 @@ export const ModalTransition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export const stringToSlug = (string) => {
-  const slug = string
-    .normalize()
-    .split("")
-    .reduce((res, char) => {
-      const appendChar = charMap[char] ? `-${charMap[char]}-` : char;
-      return (
-        res +
-        appendChar
-          .replace(/[`~!@#$%^&*()_|+=?;:'",.<>{}[\]]+/g, "")
-          .replace(/[\\/]+/g, "-")
-          .replace(/\s+/g, "-")
-          .toLowerCase()
-      );
-    }, "");
-  return slug.replace(/-{2,}/g, "-");
-};
+

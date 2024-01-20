@@ -28,6 +28,9 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { ModalTransition, createQuestion } from "./misc/common";
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
+
+import DummyQuestions from "../dummy-data-questions.json";
+
 interface PropsInterface {
   Auth: AuthInterface;
 }
@@ -38,8 +41,13 @@ const AdminQuestionList = (props: PropsInterface) => {
       navigate("/login");
     }
   }, [props.Auth.roleType]);
-  const { getQuestions, addQuestion, removeQuestion, updateQuestion } =
-    useQuestions();
+  const {
+    getQuestions,
+    addQuestion,
+    removeQuestion,
+    updateQuestion,
+    removeAllQuestions,
+  } = useQuestions();
 
   const questions = getQuestions();
 
@@ -107,10 +115,6 @@ const AdminQuestionList = (props: PropsInterface) => {
     setOpen(false);
   };
 
-  const handleAnswerClick = (questionId: string) => {
-    navigate(`/answers/${questionId}`);
-  };
-
   const updateQuestionModal = (question: QuestionInterface) => {
     setquestionActionType("update");
     setSelectedQuestion(question);
@@ -119,15 +123,44 @@ const AdminQuestionList = (props: PropsInterface) => {
       question: question.questionTitle,
     });
   };
+  const addDummyQuestions = () => {
+    DummyQuestions.forEach((q) => {
+      addQuestion(q);
+    });
+  };
+  const deleteAllQuestions = () => {
+    removeAllQuestions();
+  };
   return (
     <div>
+      <Button
+        color="primary"
+        variant="outlined"
+        onClick={addDummyQuestions}
+        sx={{
+          mt: 2,
+        }}
+      >
+        Add Dummy Questions
+      </Button>
+      <Button
+        color="primary"
+        variant="outlined"
+        onClick={deleteAllQuestions}
+        sx={{
+          mt: 2,
+          ml:2
+        }}
+      >
+        Delete All Questions
+      </Button>
       {questions.length > 0 ? (
         <>
           <h1>Questions</h1>
           <List
             sx={{ width: "100%", maxWidth: 720, bgcolor: "background.paper" }}
           >
-            {questions.map((question: QuestionInterface, index: number) => {
+            {questions.map((question: QuestionInterface) => {
               return (
                 <>
                   <ListItem

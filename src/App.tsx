@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import QuestionList from "./AdminQuestionList";
 import UserQuestionList from "./UserQuestionList";
 import Login from "./components/Common/Login";
@@ -16,7 +16,7 @@ const App: React.FC = () => {
   const [Auth, setAuth] = useState<AuthInterface>(() => {
     const Auth = localStorage.getItem("Auth");
     return Auth
-      ? JSON.parse(localStorage.getItem("Auth"))
+      ? JSON.parse(localStorage.getItem("Auth") || "")
       : {
           authenticated: false,
           roleType: "",
@@ -52,7 +52,7 @@ const App: React.FC = () => {
             path="/user/answers"
             element={
               <PrivateRoute Auth={Auth} role="participant">
-                <UserQuestionList Auth={Auth} />
+                <UserQuestionList />
               </PrivateRoute>
             }
           />

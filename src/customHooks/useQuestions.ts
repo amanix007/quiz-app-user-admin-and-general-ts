@@ -43,6 +43,10 @@ const useQuestions = () => {
       prevQuestions.filter(q => q.id !== id)
     );
   };
+  const removeAllQuestions = () => {
+    setQuestions(([])
+    );
+  };
   const addAnswer = (updatedQuestionWithAnswer: QuestionInterface): void => {
 
     setQuestions(prev => {
@@ -55,7 +59,7 @@ const useQuestions = () => {
     })
   };
 
-  return { getQuestions, getSingleQuestion, addQuestion, removeQuestion, addAnswer, updateQuestion };
+  return { getQuestions, getSingleQuestion, addQuestion, removeQuestion, addAnswer, updateQuestion, removeAllQuestions };
 };
 
 export default useQuestions;

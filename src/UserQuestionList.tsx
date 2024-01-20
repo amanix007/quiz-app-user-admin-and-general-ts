@@ -1,11 +1,9 @@
 import {
   Button,
   Divider,
-  IconButton,
   List,
   ListItem,
   ListItemAvatar,
-  ListItemButton,
   ListItemIcon,
   ListItemText,
   Typography,
@@ -18,21 +16,17 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
 import * as Yup from "yup";
-import { useNavigate } from "react-router-dom";
 import useQuestions from "./customHooks/useQuestions";
 
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import { AuthInterface, QuestionInterface } from "./types/types";
-import React, { useEffect, useState } from "react";
+import { QuestionInterface } from "./types/types";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 
-import { ModalTransition, createAnswer, stringToSlug } from "./misc/common";
+import { ModalTransition, createAnswer } from "./misc/common";
 import { theme } from "./theme/theme";
-interface PropsInterface {
-  Auth: AuthInterface;
-}
-const UserQuestionList = (props: PropsInterface) => {
+import { isEmpty } from "lodash";
+const UserQuestionList = () => {
   const [initialValues, setInitialValues] = useState({
     answer: "",
   });
@@ -80,11 +74,6 @@ const UserQuestionList = (props: PropsInterface) => {
 
   const handleClose = () => {
     setOpen(false);
-  };
-  const navigate = useNavigate();
-
-  const handleAnswerClick = (questionId: string) => {
-    navigate(`/answers/${questionId}`);
   };
 
   return (
@@ -208,7 +197,8 @@ const UserQuestionList = (props: PropsInterface) => {
               helperText={formik.touched.answer && formik.errors.answer}
             />
           </form>
-          {selectedQuestion?.answer?.answerHistory.length < 2 ? (
+          {!isEmpty(selectedQuestion) &&
+          selectedQuestion?.answer?.answerHistory.length < 2 ? (
             <p>
               <strong>No edit history available</strong>
             </p>
@@ -232,12 +222,15 @@ const UserQuestionList = (props: PropsInterface) => {
         </DialogContent>
         <DialogActions>
           <Button onClick={() => handleClose()}>Cancel</Button>
-          <Button type="submit" variant="contained" color="primary">
-            {selectedQuestion?.answer.answerHistory.length > 0
-              ? "Update"
-              : "Add"}{" "}
-            Answer
-          </Button>
+          {
+            <Button type="submit" variant="contained" color="primary">
+              {!isEmpty(selectedQuestion) &&
+              selectedQuestion?.answer?.answerHistory?.length > 0
+                ? "Update"
+                : "Add"}{" "}
+              Answer
+            </Button>
+          }
         </DialogActions>
       </Dialog>
     </div>
