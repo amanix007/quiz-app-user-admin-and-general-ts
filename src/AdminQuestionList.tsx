@@ -193,7 +193,7 @@ const AdminQuestionList = (props: PropsInterface) => {
                       </ListItemIcon>
                     </ListItemAvatar>
                     <ListItemText
-                      primary={question.questionTitle}
+                      primary={`Question: ${question.questionTitle}`}
                       secondary={
                         <React.Fragment>
                           <Typography
@@ -203,7 +203,7 @@ const AdminQuestionList = (props: PropsInterface) => {
                             color="text.primary"
                           >
                             {question.answer.answerHistory.length > 0
-                              ? question.answer.answerHistory[0]
+                              ? `Answer: ${question.answer.answerHistory[0]}` 
                               : ""}
                           </Typography>
                         </React.Fragment>
