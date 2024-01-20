@@ -8,8 +8,6 @@ export interface UserAnswerInterface {
   answerHistory: string[];
 }
 
-
-
 interface ProfileInterface {
   role: "admin" | "participant"
 }

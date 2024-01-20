@@ -1,23 +1,22 @@
-## Model
-
-**Admin Data Model**
- - Admin --  Login Admin 
- - Admin --  Add Question  
- - Admin --  View Answer For the question 
- - Admin --  Edit Answer For the question 
- - Admin --  Delete Answer For the question
 
 
+(https://main--eloquent-buttercream-2330bc.netlify.app/)
 
-**User Data Model**
-User --  Login
-User --  Answer Question
-User --  Edit Answer 
-User --  Answer Edit History
+## [Demo Link ](https://main--eloquent-buttercream-2330bc.netlify.app/)
+[Video Demo Link](https://drive.google.com/file/d/10KxBMNwKpN0mrziNnfcILzPS3e4G7Abm/view)
+https://drive.google.com/file/d/10KxBMNwKpN0mrziNnfcILzPS3e4G7Abm/view
+ **Features**
+ - Login   (Role Type : `admin | participant`)
+ - Protected Page Questions for Admin
+ - Static Data Will persist in the browser.  
+ - User Authentication data will persist in browser.
+ - Question List Will persist in the browser.  
+ - Answer Edit History will persist in the browser.
 
-
-**Generic Features**  
- - Private Dashboard  for Admin
+**Other Features**
+ - Duplicate Edit History Prevention
+ - Dummy data adding Feature
  - Static Data Will persist in the browser.  
  - Question List Will persist in the browser.  
  - Answer Edit History will persist in the browser.
+
