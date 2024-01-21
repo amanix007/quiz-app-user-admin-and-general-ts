@@ -9,14 +9,12 @@ https://drive.google.com/file/d/10KxBMNwKpN0mrziNnfcILzPS3e4G7Abm/view
  - Login   (Role Type : `admin | participant`)
  - Protected Page Questions for Admin
  - Static Data Will persist in the browser.  
- - User Authentication data will persist in browser.
+ - User Authentication data will persist in the browser.
  - Question List Will persist in the browser.  
  - Answer Edit History will persist in the browser.
 
 **Other Features**
  - Duplicate Edit History Prevention
  - Dummy data adding Feature
- - Static Data Will persist in the browser.  
- - Question List Will persist in the browser.  
- - Answer Edit History will persist in the browser.
+ - Delete all questions feature
 
